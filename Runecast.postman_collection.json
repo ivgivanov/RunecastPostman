@@ -1,0 +1,222 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Runecast",
+		"_postman_id": "b36fa0f2-7a4c-4787-772b-01b637bfb61a",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Configuration",
+			"description": "",
+			"item": [
+				{
+					"name": "Get syslog configuration",
+					"request": {
+						"url": "https://{{Server}}/rc2/api/v1/syslog_config",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{APIKey}}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get syslog configuration for the specified vCenter",
+					"request": {
+						"url": "https://{{Server}}/rc2/api/v1/syslog_config/af95a392-a681-4888-b7e4-6e47b34f9c94",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{APIKey}}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Licensing",
+			"description": "",
+			"item": [
+				{
+					"name": "Get info about licenses",
+					"request": {
+						"url": "https://{{Server}}/rc2/api/v1/licenses",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{APIKey}}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Results of Analysis",
+			"description": "",
+			"item": [
+				{
+					"name": "Get all issues (and their findings) reported in the last scan",
+					"request": {
+						"url": "https://{{Server}}/rc2/api/v1/results",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{APIKey}}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get all findings reported in the last scan for the specified KB",
+					"request": {
+						"url": "https://{{Server}}/rc2/api/v1/results/kbs/20000048",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{APIKey}}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get all findings reported in the last scan for the specified KB and vCenter",
+					"request": {
+						"url": "https://{{Server}}/rc2/api/v1/results/kbs/20000048/af95a392-a681-4888-b7e4-6e47b34f9c94",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{APIKey}}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get all issues (and their findings) reported in the last scan for the specified vCenter",
+					"request": {
+						"url": "https://{{Server}}/rc2/api/v1/results/objects/af95a392-a681-4888-b7e4-6e47b34f9c94",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{APIKey}}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get all issues reported in the last scan that the specified object contributed to",
+					"request": {
+						"url": "https://{{Server}}/rc2/api/v1/results/objects/af95a392-a681-4888-b7e4-6e47b34f9c94/host-696",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{APIKey}}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "vCenters",
+			"description": "",
+			"item": [
+				{
+					"name": "Trigger scan of the specified vCenter",
+					"request": {
+						"url": "https://{{Server}}/rc2/api/v1/scan/af95a392-a681-4888-b7e4-6e47b34f9c94",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{APIKey}}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get scan status for the specified vCenter",
+					"request": {
+						"url": "https://{{Server}}/rc2/api/v1/scanStatus/af95a392-a681-4888-b7e4-6e47b34f9c94",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{APIKey}}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get info about vCenters",
+					"request": {
+						"url": "https://{{Server}}/rc2/api/v1/vcenters",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{APIKey}}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
