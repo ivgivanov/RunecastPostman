@@ -1,9 +1,9 @@
 {
 	"variables": [],
 	"info": {
-		"name": "Runecast",
-		"_postman_id": "b36fa0f2-7a4c-4787-772b-01b637bfb61a",
-		"description": "",
+		"name": "Runecast Analyzer REST API",
+		"_postman_id": "68a9859c-8077-f455-35fc-07c96c805407",
+		"description": "The whole Runecast Analyzer REST API can be explored and tested here. You can also download [swagger.json](v2/api-docs). Please note that the 'Try it out' action executes the query against your own environment and as such it may modify or erase your data and settings.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
 	"item": [
@@ -12,14 +12,24 @@
 			"description": "",
 			"item": [
 				{
-					"name": "Get syslog configuration",
+					"name": "Get log retention settings",
 					"request": {
-						"url": "https://{{Server}}/rc2/api/v1/syslog_config",
+						"url": "https://{{rcapp}}/rc2/api/v1/scheduler/logs",
 						"method": "GET",
 						"header": [
 							{
+								"key": "Accept",
+								"value": "application/json;charset=UTF-8",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
 								"key": "Authorization",
-								"value": "{{APIKey}}",
+								"value": "{{token}}",
 								"description": ""
 							}
 						],
@@ -29,14 +39,592 @@
 					"response": []
 				},
 				{
-					"name": "Get syslog configuration for the specified vCenter",
+					"name": "Update log retention settings",
 					"request": {
-						"url": "https://{{Server}}/rc2/api/v1/syslog_config/af95a392-a681-4888-b7e4-6e47b34f9c94",
+						"url": "https://{{rcapp}}/rc2/api/v1/scheduler/logs",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json;charset=UTF-8",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json;charset=UTF-8",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "log retention settings"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get syslog configuration",
+					"request": {
+						"url": "https://{{rcapp}}/rc2/api/v1/syslog_config",
 						"method": "GET",
 						"header": [
 							{
+								"key": "Accept",
+								"value": "application/json;charset=UTF-8",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
 								"key": "Authorization",
-								"value": "{{APIKey}}",
+								"value": "{{token}}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": "Returns info about the Syslog configuration for all vCenters. If there is no Syslog configuration stored for a particular vCenter registered with Runecast Analyzer, a refresh of the stored data is triggered and the results will be available in subsequent calls in a few seconds."
+					},
+					"response": []
+				},
+				{
+					"name": "Update syslog config",
+					"request": {
+						"url": "https://{{rcapp}}/rc2/api/v1/syslog_config",
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json;charset=UTF-8",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json;charset=UTF-8",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "syslog config"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get syslog configuration for the specified vCenter",
+					"request": {
+						"url": {
+							"raw": "https://{{rcapp}}/rc2/api/v1/syslog_config/:vcUid",
+							"protocol": "https",
+							"host": [
+								"{{rcapp}}"
+							],
+							"path": [
+								"rc2",
+								"api",
+								"v1",
+								"syslog_config",
+								":vcUid"
+							],
+							"query": [],
+							"variable": [
+								{
+									"description": "",
+									"key": "vcUid",
+									"value": "{{vcUid}}"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json;charset=UTF-8",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": "Returns info about the Syslog configuration for all vCenters. If there is no Syslog configuration stored for the particular vCenter, a refresh of the stored data is triggered and the results will be available in subsequent calls in a few seconds."
+					},
+					"response": []
+				},
+				{
+					"name": "Get syslog configuration for the specified object",
+					"request": {
+						"url": {
+							"raw": "https://{{rcapp}}/rc2/api/v1/syslog_config/:vcUid/:moid",
+							"protocol": "https",
+							"host": [
+								"{{rcapp}}"
+							],
+							"path": [
+								"rc2",
+								"api",
+								"v1",
+								"syslog_config",
+								":vcUid",
+								":moid"
+							],
+							"query": [],
+							"variable": [
+								{
+									"description": "",
+									"key": "vcUid",
+									"value": "{{vcUid}}"
+								},
+								{
+									"description": "",
+									"key": "moid",
+									"value": "{{moid}}"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json;charset=UTF-8",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Filters",
+			"description": "",
+			"item": [
+				{
+					"name": "Remove all filters",
+					"request": {
+						"url": "https://{{rcapp}}/rc2/api/v1/filters",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json;charset=UTF-8",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Import filters from file",
+					"request": {
+						"url": "https://{{rcapp}}/rc2/api/v1/filters",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json;charset=UTF-8",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"value": "{{file}}",
+									"type": "text"
+								}
+							]
+						},
+						"description": "Alternatively to uploading the file, it is possible to provide a JSON specification of the filters as seen in GET /filters."
+					},
+					"response": []
+				},
+				{
+					"name": "Remove a filter",
+					"request": {
+						"url": {
+							"raw": "https://{{rcapp}}/rc2/api/v1/filters/:filterId",
+							"protocol": "https",
+							"host": [
+								"{{rcapp}}"
+							],
+							"path": [
+								"rc2",
+								"api",
+								"v1",
+								"filters",
+								":filterId"
+							],
+							"query": [],
+							"variable": [
+								{
+									"description": "",
+									"key": "filterId",
+									"value": "{{filterId}}"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json;charset=UTF-8",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get info about a filter",
+					"request": {
+						"url": {
+							"raw": "https://{{rcapp}}/rc2/api/v1/filters/:filterId",
+							"protocol": "https",
+							"host": [
+								"{{rcapp}}"
+							],
+							"path": [
+								"rc2",
+								"api",
+								"v1",
+								"filters",
+								":filterId"
+							],
+							"query": [],
+							"variable": [
+								{
+									"description": "",
+									"key": "filterId",
+									"value": "{{filterId}}"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json;charset=UTF-8",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Update a filter",
+					"request": {
+						"url": {
+							"raw": "https://{{rcapp}}/rc2/api/v1/filters/:filterId",
+							"protocol": "https",
+							"host": [
+								"{{rcapp}}"
+							],
+							"path": [
+								"rc2",
+								"api",
+								"v1",
+								"filters",
+								":filterId"
+							],
+							"query": [],
+							"variable": [
+								{
+									"description": "",
+									"key": "filterId",
+									"value": "{{filterId}}"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json;charset=UTF-8",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json;charset=UTF-8",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "filter"
+						},
+						"description": "In the request, it is specified if the filter should be enabled or disabled. If it is to be enabled, it is checked against the requirements and only enabled if it meets all of them. More specifically, in order to be enabled, a filter must contain a non-empty set of **kbIds** and a non-empty set of **objects**. The response will contain the filter that was actually saved after these requirements were checked."
+					},
+					"response": []
+				},
+				{
+					"name": "Enable or disable a filter",
+					"request": {
+						"url": {
+							"raw": "https://{{rcapp}}/rc2/api/v1/filters/:filterId:?enabled?enabled={{enabled}}",
+							"protocol": "https",
+							"host": [
+								"{{rcapp}}"
+							],
+							"path": [
+								"rc2",
+								"api",
+								"v1",
+								"filters",
+								":filterId:"
+							],
+							"query": [
+								{
+									"key": "enabled?enabled",
+									"value": "{{enabled}}",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": [
+								{
+									"description": "",
+									"key": "filterId",
+									"value": "{{filterId}}"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json;charset=UTF-8",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json;charset=UTF-8",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": "In the request, it is specified if the filter should be enabled or disabled. If it is to be enabled, it is checked against the requirements and only enabled if it meets all of them. More specifically, in order to be enabled, a filter must contain a non-empty set of **kbIds** and a non-empty set of **objects**. The response will contain the filter that was actually saved after these requirements were checked."
+					},
+					"response": []
+				},
+				{
+					"name": "Get info about filters",
+					"request": {
+						"url": {
+							"raw": "https://{{rcapp}}/rc2/api/v1/filters:?enabled?enabled={{enabled}}",
+							"protocol": "https",
+							"host": [
+								"{{rcapp}}"
+							],
+							"path": [
+								"rc2",
+								"api",
+								"v1",
+								"filters:"
+							],
+							"query": [
+								{
+									"key": "enabled?enabled",
+									"value": "{{enabled}}",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json;charset=UTF-8",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Inventory objects",
+			"description": "",
+			"item": [
+				{
+					"name": "Get all hosts",
+					"request": {
+						"url": "https://{{rcapp}}/rc2/api/v1/hosts",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json;charset=UTF-8",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "KBs",
+			"description": "",
+			"item": [
+				{
+					"name": "Get KBs used by Runecast",
+					"request": {
+						"url": {
+							"raw": "https://{{rcapp}}/rc2/api/v1/kbs:?type?type={{type}}",
+							"protocol": "https",
+							"host": [
+								"{{rcapp}}"
+							],
+							"path": [
+								"rc2",
+								"api",
+								"v1",
+								"kbs:"
+							],
+							"query": [
+								{
+									"key": "type?type",
+									"value": "{{type}}",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json;charset=UTF-8",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
 								"description": ""
 							}
 						],
@@ -52,37 +640,24 @@
 			"description": "",
 			"item": [
 				{
-					"name": "Get info about licenses",
+					"name": "Remove all licenses",
 					"request": {
-						"url": "https://{{Server}}/rc2/api/v1/licenses",
-						"method": "GET",
+						"url": "https://{{rcapp}}/rc2/api/v1/licenses",
+						"method": "DELETE",
 						"header": [
 							{
-								"key": "Authorization",
-								"value": "{{APIKey}}",
+								"key": "Accept",
+								"value": "application/json;charset=UTF-8",
 								"description": ""
-							}
-						],
-						"body": {},
-						"description": ""
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Results of Analysis",
-			"description": "",
-			"item": [
-				{
-					"name": "Get all issues (and their findings) reported in the last scan",
-					"request": {
-						"url": "https://{{Server}}/rc2/api/v1/results",
-						"method": "GET",
-						"header": [
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
 							{
 								"key": "Authorization",
-								"value": "{{APIKey}}",
+								"value": "{{token}}",
 								"description": ""
 							}
 						],
@@ -92,14 +667,269 @@
 					"response": []
 				},
 				{
-					"name": "Get all findings reported in the last scan for the specified KB",
+					"name": "Get info about licenses",
 					"request": {
-						"url": "https://{{Server}}/rc2/api/v1/results/kbs/20000048",
+						"url": "https://{{rcapp}}/rc2/api/v1/licenses",
 						"method": "GET",
 						"header": [
 							{
+								"key": "Accept",
+								"value": "application/json;charset=UTF-8",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
 								"key": "Authorization",
-								"value": "{{APIKey}}",
+								"value": "{{token}}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Add a license",
+					"request": {
+						"url": "https://{{rcapp}}/rc2/api/v1/licenses",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json;charset=UTF-8",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"value": "{{file}}",
+									"type": "text"
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Remove a license",
+					"request": {
+						"url": {
+							"raw": "https://{{rcapp}}/rc2/api/v1/licenses/:licenseId",
+							"protocol": "https",
+							"host": [
+								"{{rcapp}}"
+							],
+							"path": [
+								"rc2",
+								"api",
+								"v1",
+								"licenses",
+								":licenseId"
+							],
+							"query": [],
+							"variable": [
+								{
+									"description": "",
+									"key": "licenseId",
+									"value": "{{licenseId}}"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json;charset=UTF-8",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Update a license",
+					"request": {
+						"url": {
+							"raw": "https://{{rcapp}}/rc2/api/v1/licenses/:licenseId",
+							"protocol": "https",
+							"host": [
+								"{{rcapp}}"
+							],
+							"path": [
+								"rc2",
+								"api",
+								"v1",
+								"licenses",
+								":licenseId"
+							],
+							"query": [],
+							"variable": [
+								{
+									"description": "",
+									"key": "licenseId",
+									"value": "{{licenseId}}"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json;charset=UTF-8",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json;charset=UTF-8",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "license details"
+						},
+						"description": "After uploading a license file, update the license details here. More specifically, this allows to set the description and the hosts to be licensed by a particular license. The response contains the current state of the license - which is not necessarily the state requested by the update in case an unknown host was added or the license did not provide enough CPUs for all listed hosts."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Results of analysis",
+			"description": "",
+			"item": [
+				{
+					"name": "Get all findings reported in the last scan for the specified KB and vCenter",
+					"request": {
+						"url": {
+							"raw": "https://{{rcapp}}/rc2/api/v1/results/issues/:kbId/:vcUid:",
+							"protocol": "https",
+							"host": [
+								"{{rcapp}}"
+							],
+							"path": [
+								"rc2",
+								"api",
+								"v1",
+								"results",
+								"issues",
+								":kbId",
+								":vcUid:"
+							],
+							"query": [],
+							"variable": [
+								{
+									"description": "",
+									"key": "kbId",
+									"value": "{{kbId}}"
+								},
+								{
+									"description": "",
+									"key": "vcUid",
+									"value": "{{vcUid}}"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json;charset=UTF-8",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get all findings reported in the last scan for the specified issue",
+					"request": {
+						"url": {
+							"raw": "https://{{rcapp}}/rc2/api/v1/results/issues/:kbId:",
+							"protocol": "https",
+							"host": [
+								"{{rcapp}}"
+							],
+							"path": [
+								"rc2",
+								"api",
+								"v1",
+								"results",
+								"issues",
+								":kbId:"
+							],
+							"query": [],
+							"variable": [
+								{
+									"description": "",
+									"key": "kbId",
+									"value": "{{kbId}}"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json;charset=UTF-8",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
 								"description": ""
 							}
 						],
@@ -111,12 +941,50 @@
 				{
 					"name": "Get all findings reported in the last scan for the specified KB and vCenter",
 					"request": {
-						"url": "https://{{Server}}/rc2/api/v1/results/kbs/20000048/af95a392-a681-4888-b7e4-6e47b34f9c94",
+						"url": {
+							"raw": "https://{{rcapp}}/rc2/api/v1/results/kbs/:kbId/:vcUid:",
+							"protocol": "https",
+							"host": [
+								"{{rcapp}}"
+							],
+							"path": [
+								"rc2",
+								"api",
+								"v1",
+								"results",
+								"kbs",
+								":kbId",
+								":vcUid:"
+							],
+							"query": [],
+							"variable": [
+								{
+									"description": "",
+									"key": "kbId",
+									"value": "{{kbId}}"
+								},
+								{
+									"description": "",
+									"key": "vcUid",
+									"value": "{{vcUid}}"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [
 							{
+								"key": "Accept",
+								"value": "application/json;charset=UTF-8",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
 								"key": "Authorization",
-								"value": "{{APIKey}}",
+								"value": "{{token}}",
 								"description": ""
 							}
 						],
@@ -126,14 +994,46 @@
 					"response": []
 				},
 				{
-					"name": "Get all issues (and their findings) reported in the last scan for the specified vCenter",
+					"name": "Get all findings reported in the last scan for the specified KB",
 					"request": {
-						"url": "https://{{Server}}/rc2/api/v1/results/objects/af95a392-a681-4888-b7e4-6e47b34f9c94",
+						"url": {
+							"raw": "https://{{rcapp}}/rc2/api/v1/results/kbs/:kbId:",
+							"protocol": "https",
+							"host": [
+								"{{rcapp}}"
+							],
+							"path": [
+								"rc2",
+								"api",
+								"v1",
+								"results",
+								"kbs",
+								":kbId:"
+							],
+							"query": [],
+							"variable": [
+								{
+									"description": "",
+									"key": "kbId",
+									"value": "{{kbId}}"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [
 							{
+								"key": "Accept",
+								"value": "application/json;charset=UTF-8",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
 								"key": "Authorization",
-								"value": "{{APIKey}}",
+								"value": "{{token}}",
 								"description": ""
 							}
 						],
@@ -145,16 +1045,516 @@
 				{
 					"name": "Get all issues reported in the last scan that the specified object contributed to",
 					"request": {
-						"url": "https://{{Server}}/rc2/api/v1/results/objects/af95a392-a681-4888-b7e4-6e47b34f9c94/host-696",
+						"url": {
+							"raw": "https://{{rcapp}}/rc2/api/v1/results/objects/:vcUid/:moid:",
+							"protocol": "https",
+							"host": [
+								"{{rcapp}}"
+							],
+							"path": [
+								"rc2",
+								"api",
+								"v1",
+								"results",
+								"objects",
+								":vcUid",
+								":moid:"
+							],
+							"query": [],
+							"variable": [
+								{
+									"description": "",
+									"key": "vcUid",
+									"value": "{{vcUid}}"
+								},
+								{
+									"description": "",
+									"key": "moid",
+									"value": "{{moid}}"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [
 							{
+								"key": "Accept",
+								"value": "application/json;charset=UTF-8",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
 								"key": "Authorization",
-								"value": "{{APIKey}}",
+								"value": "{{token}}",
 								"description": ""
 							}
 						],
 						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get all issues (and their findings) reported in the last scan for the specified vCenter",
+					"request": {
+						"url": {
+							"raw": "https://{{rcapp}}/rc2/api/v1/results/objects/:vcUid:",
+							"protocol": "https",
+							"host": [
+								"{{rcapp}}"
+							],
+							"path": [
+								"rc2",
+								"api",
+								"v1",
+								"results",
+								"objects",
+								":vcUid:"
+							],
+							"query": [],
+							"variable": [
+								{
+									"description": "",
+									"key": "vcUid",
+									"value": "{{vcUid}}"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json;charset=UTF-8",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get all issues (and their findings) reported in the last scan",
+					"request": {
+						"url": "https://{{rcapp}}/rc2/api/v1/results",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json;charset=UTF-8",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": "The results include all vCenters that have been scanned before, even if the last scan failed. In the case of a failed scan, the results for the particular vCenter will be empty."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Scheduled tasks",
+			"description": "",
+			"item": [
+				{
+					"name": "Get email alerts settings",
+					"request": {
+						"url": "https://{{rcapp}}/rc2/api/v1/alerts/email",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json;charset=UTF-8",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Update email alerting settings",
+					"request": {
+						"url": "https://{{rcapp}}/rc2/api/v1/alerts/email",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json;charset=UTF-8",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json;charset=UTF-8",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "email alerts settings"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Enable or disable email alerts",
+					"request": {
+						"url": {
+							"raw": "https://{{rcapp}}/rc2/api/v1/alerts/email:?enabled?enabled={{enabled}}",
+							"protocol": "https",
+							"host": [
+								"{{rcapp}}"
+							],
+							"path": [
+								"rc2",
+								"api",
+								"v1",
+								"alerts",
+								"email:"
+							],
+							"query": [
+								{
+									"key": "enabled?enabled",
+									"value": "{{enabled}}",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json;charset=UTF-8",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json;charset=UTF-8",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get scheduled scan",
+					"request": {
+						"url": "https://{{rcapp}}/rc2/api/v1/scheduler/scan",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json;charset=UTF-8",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Update scheduled scan",
+					"request": {
+						"url": "https://{{rcapp}}/rc2/api/v1/scheduler/scan",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json;charset=UTF-8",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json;charset=UTF-8",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "scheduled scan description"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User accounts",
+			"description": "",
+			"item": [
+				{
+					"name": "Get AD settings",
+					"request": {
+						"url": "https://{{rcapp}}/rc2/api/v1/users/ad",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json;charset=UTF-8",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Update Active Directory settings",
+					"request": {
+						"url": "https://{{rcapp}}/rc2/api/v1/users/ad",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json;charset=UTF-8",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json;charset=UTF-8",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "Active Directory settings"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Enable or disable Active Directory accounts",
+					"request": {
+						"url": {
+							"raw": "https://{{rcapp}}/rc2/api/v1/users/ad?enabled=false",
+							"protocol": "https",
+							"host": [
+								"{{rcapp}}"
+							],
+							"path": [
+								"rc2",
+								"api",
+								"v1",
+								"users",
+								"ad"
+							],
+							"query": [
+								{
+									"key": "enabled",
+									"value": "false",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json;charset=UTF-8",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json;charset=UTF-8",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Update local user",
+					"request": {
+						"url": {
+							"raw": "https://{{rcapp}}/rc2/api/v1/users/local/:username",
+							"protocol": "https",
+							"host": [
+								"{{rcapp}}"
+							],
+							"path": [
+								"rc2",
+								"api",
+								"v1",
+								"users",
+								"local",
+								":username"
+							],
+							"query": [],
+							"variable": [
+								{
+									"description": "",
+									"key": "username",
+									"value": "{{username}}"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json;charset=UTF-8",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json;charset=UTF-8",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "user details"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Generate access token for user",
+					"request": {
+						"url": {
+							"raw": "https://{{rcapp}}/rc2/api/v1/users/local/:username/tokens",
+							"protocol": "https",
+							"host": [
+								"{{rcapp}}"
+							],
+							"path": [
+								"rc2",
+								"api",
+								"v1",
+								"users",
+								"local",
+								":username",
+								"tokens"
+							],
+							"query": [],
+							"variable": [
+								{
+									"description": "",
+									"key": "username",
+									"value": "{{username}}"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json;charset=UTF-8",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json;charset=UTF-8",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "authentication details and access token description"
+						},
 						"description": ""
 					},
 					"response": []
@@ -168,12 +1568,43 @@
 				{
 					"name": "Trigger scan of the specified vCenter",
 					"request": {
-						"url": "https://{{Server}}/rc2/api/v1/scan/af95a392-a681-4888-b7e4-6e47b34f9c94",
+						"url": {
+							"raw": "https://{{rcapp}}/rc2/api/v1/scan/:vcUid",
+							"protocol": "https",
+							"host": [
+								"{{rcapp}}"
+							],
+							"path": [
+								"rc2",
+								"api",
+								"v1",
+								"scan",
+								":vcUid"
+							],
+							"query": [],
+							"variable": [
+								{
+									"description": "",
+									"key": "vcUid",
+									"value": "{{vcUid}}"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [
 							{
+								"key": "Accept",
+								"value": "application/json;charset=UTF-8",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
 								"key": "Authorization",
-								"value": "{{APIKey}}",
+								"value": "{{token}}",
 								"description": ""
 							}
 						],
@@ -185,12 +1616,70 @@
 				{
 					"name": "Get scan status for the specified vCenter",
 					"request": {
-						"url": "https://{{Server}}/rc2/api/v1/scanStatus/af95a392-a681-4888-b7e4-6e47b34f9c94",
+						"url": {
+							"raw": "https://{{rcapp}}/rc2/api/v1/scan_status/:vcUid",
+							"protocol": "https",
+							"host": [
+								"{{rcapp}}"
+							],
+							"path": [
+								"rc2",
+								"api",
+								"v1",
+								"scan_status",
+								":vcUid"
+							],
+							"query": [],
+							"variable": [
+								{
+									"description": "",
+									"key": "vcUid",
+									"value": "{{vcUid}}"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [
 							{
+								"key": "Accept",
+								"value": "application/json;charset=UTF-8",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
 								"key": "Authorization",
-								"value": "{{APIKey}}",
+								"value": "{{token}}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Remove all vCenters",
+					"request": {
+						"url": "https://{{rcapp}}/rc2/api/v1/vcenters",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json;charset=UTF-8",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
 								"description": ""
 							}
 						],
@@ -202,17 +1691,174 @@
 				{
 					"name": "Get info about vCenters",
 					"request": {
-						"url": "https://{{Server}}/rc2/api/v1/vcenters",
+						"url": "https://{{rcapp}}/rc2/api/v1/vcenters",
 						"method": "GET",
 						"header": [
 							{
+								"key": "Accept",
+								"value": "application/json;charset=UTF-8",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
 								"key": "Authorization",
-								"value": "{{APIKey}}",
+								"value": "{{token}}",
 								"description": ""
 							}
 						],
 						"body": {},
 						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Remove a vCenter",
+					"request": {
+						"url": {
+							"raw": "https://{{rcapp}}/rc2/api/v1/vcenters/:vcUid",
+							"protocol": "https",
+							"host": [
+								"{{rcapp}}"
+							],
+							"path": [
+								"rc2",
+								"api",
+								"v1",
+								"vcenters",
+								":vcUid"
+							],
+							"query": [],
+							"variable": [
+								{
+									"description": "",
+									"key": "vcUid",
+									"value": "{{vcUid}}"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json;charset=UTF-8",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get info about a vCenter",
+					"request": {
+						"url": {
+							"raw": "https://{{rcapp}}/rc2/api/v1/vcenters/:vcUid",
+							"protocol": "https",
+							"host": [
+								"{{rcapp}}"
+							],
+							"path": [
+								"rc2",
+								"api",
+								"v1",
+								"vcenters",
+								":vcUid"
+							],
+							"query": [],
+							"variable": [
+								{
+									"description": "",
+									"key": "vcUid",
+									"value": "{{vcUid}}"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json;charset=UTF-8",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Add or update a vCenter",
+					"request": {
+						"url": {
+							"raw": "https://{{rcapp}}/rc2/api/v1/vcenters:?async?async=false",
+							"protocol": "https",
+							"host": [
+								"{{rcapp}}"
+							],
+							"path": [
+								"rc2",
+								"api",
+								"v1",
+								"vcenters:"
+							],
+							"query": [
+								{
+									"key": "async?async",
+									"value": "false",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json;charset=UTF-8",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json;charset=UTF-8",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "vCenter"
+						},
+						"description": "Add a new vCenter or replace an existing vCenter configuration if the IP address and port are already registered in Runecast Analyzer. This operation also verifies the connection to the specified vCenter and checks the credentials provided in the request, so it may take a few seconds to complete. By default, it is performed synchronously, i.e. it blocks until the connection to the vCenter is verified; however, if an optional parameter 'async' is set to true, it will return immediately and the necessary checks will be performed asynchronously. In the latter case, the endpoint returns '202 Accepted' as an indication of receiving the task."
 					},
 					"response": []
 				}
